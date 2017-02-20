@@ -40,17 +40,18 @@ lines = HelperFunctions.hough_lines(masked_edges, rh, theta, threshold, min_line
 #6 weighted image
 final_image = HelperFunctions.weighted_img(lines,image_copy)
 
-interp = 'bilinear'
-fig, axs = plt.subplots(nrows=4, sharex=True)
-axs[0].set_title('Original')
-axs[0].imshow(image_original, origin='upper', interpolation=interp)
-
-axs[1].set_title('Canny')
-axs[1].imshow(masked_edges, cmap='Greys_r', origin='upper', interpolation=interp)
-
-axs[2].set_title('Hough Line')
-axs[2].imshow(lines, origin='upper', interpolation=interp)
-
-axs[3].set_title('Final')
-axs[3].imshow(final_image, origin='upper', interpolation=interp)
+plt.imshow(final_image)
+# interp = 'bilinear'
+# fig, axs = plt.subplots(nrows=4, sharex=True)
+# axs[0].set_title('Original')
+# axs[0].imshow(image_original, origin='upper', interpolation=interp)
+#
+# axs[1].set_title('Canny')
+# axs[1].imshow(masked_edges, cmap='Greys_r', origin='upper', interpolation=interp)
+#
+# axs[2].set_title('Hough Line')
+# axs[2].imshow(lines, origin='upper', interpolation=interp)
+#
+# axs[3].set_title('Final')
+# axs[3].imshow(final_image, origin='upper', interpolation=interp)
 plt.show()
