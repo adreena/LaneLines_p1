@@ -1,16 +1,22 @@
 #**Finding Lane Lines on the Road** 
 
-##Writeup Template
-
-###You can use this file as a template for your writeup if you want to submit it as a markdown file. But feel free to use some other method and submit a pdf if you prefer.
-
----
 
 **Finding Lane Lines on the Road**
 
 The goals / steps of this project are the following:
-* Make a pipeline that finds lane lines on the road
-* Reflect on your work in a written report
+
+* Step 1: Reading the image 
+* Step 2: Converting the image from RGB to Gray
+  
+  In order to prepare input image for edge detection, it needs to be converted to grayscale first.
+  method used for this conversion: ```cv2.cvtColor(input_image, cv2.COLOR_RGB2GRAY)```
+  [image1]: ./examples/grayscale.jpg "Grayscale"
+* Step 3: Smoothing the image using GaussianBlur
+* Step 4: Finding edges using Canny edge detection with a set of low and high threshold
+* Step 5: Marking a region that has high probablity of containing LaneLines with a set of vertices as a polygon
+* Step 6: Sending the masked_region to HoughLine Transformation to detect lines
+* Step 7: Filtering outliers and drawing lines 
+* Step 8: displaying the lines on the input image 
 
 
 [//]: # (Image References)
