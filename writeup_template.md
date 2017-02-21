@@ -9,7 +9,6 @@ The goals / steps of this project are the following:
 * Step 2: Converting the image from RGB to Gray
   
   In order to prepare input image for edge detection, it needs to be converted to grayscale first.
-  method used for this conversion: ```cv2.cvtColor(input_image, cv2.COLOR_RGB2GRAY)```
 * Step 3: Smoothing the image using GaussianBlur
 
   Blurred the image using kernel_size=3 for images and kernel_size = 9 for video images for smoothing the edges to get better results from canny
@@ -25,14 +24,26 @@ The goals / steps of this project are the following:
     * upper part of polygon: Xs have a mrgin of 150px from the middle of the image(horizontally) and margin of ~60px from the middle of the image (vertically)
 * Step 6: Sending the masked_region to HoughLine Transformation to detect lines
   
-  Method used for this section with following paramters: ```cv2.HoughLinesP(edges, rho, theta, threshold, np.array([]), minLineLength=min_line_len, maxLineGap=max_line_gap)```
+  Followign paramters are used for doing HoughLine transformation
     * rh = 1
     * theta = np.pi/180
     * threshold = 7
     * min_line_length = 5
     * max_line_gap = 10
 * Step 7: Filtering outliers and drawing lines 
+  In this section I did the following modifications to remove outliers from data_points and connect lines on each side to form a solid line
+   * I separated the lines based on their slope negative/postive into 2 sets of left_lines and right_lines accordingally
+     As a further step to remove some othe outliers, I added another check to see if the points have correct position by comparing their x value (as avarage of x1 & x2 of the line) to x_middle of the image : 
+     * 1- if slope is negative and x_avg <= x_middle it's accpeted and appended to left_lines
+     * 2- if slope is postive and x_avg >= x_middle , it's accepted and appended to right_lines
+   * After creating 2 lists of left/right lines , I passed each list through another filtering process by comparing their differences from the median of lines (in each list). Those having a difference bigger than threshold=6 are kept and the rest are masked-out.
+   * For the last step :
+     * I sroted filtered_lists based on their x values to find points with minimum/maximum x-values. 
+     * Then I calculated coefficients of a fitting line between these 2 points to find `a` and `b` of `y=ax+b` using polyfit.
+     * Next I found a point(x,y) on the fitted line that has y=image.hight to have Lane_Lines starting from the bottom of the image as (x1,y1)
+     * Final step is to connect a line from the bottom point(x1,y1) to a point with highest x-value from the list as(x2,y2)
 * Step 8: displaying the lines on the input image 
+
 
 
 [//]: # (Image References)
