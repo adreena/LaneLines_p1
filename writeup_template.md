@@ -10,7 +10,9 @@ The goals / steps of this project are the following:
   
   In order to prepare input image for edge detection, it needs to be converted to grayscale first.
   method used for this conversion: ```cv2.cvtColor(input_image, cv2.COLOR_RGB2GRAY)```
-  [image1]: ./examples/grayscale.jpg "Grayscale"
+  
+  [image1]: ./examples/gray.png "Grayscale"
+
 * Step 3: Smoothing the image using GaussianBlur
 * Step 4: Finding edges using Canny edge detection with a set of low and high threshold
 * Step 5: Marking a region that has high probablity of containing LaneLines with a set of vertices as a polygon
