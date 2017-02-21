@@ -4,7 +4,6 @@ import matplotlib.image as mpimg
 import numpy as np
 import cv2
 import math
-import math
 LEFT= 'LEFT'
 RIGHT= 'RIGHT'
 
@@ -50,17 +49,31 @@ def region_of_interest(img, vertices):
     masked_image = cv2.bitwise_and(img, mask)
     return masked_image
 
-def find_side(x1,y1,x2,y2, x_mid_line, y_mid_line):
-    avg_x = int((x1+x2)/2)
-    avg_y = int((y1+y2)/2)
-    slope = (y2-y1)/(x2-x1)
+def find_slope(x1,y1,x2,y2):
+    return ((y2-y1)/(x2-x1))
+
+def find_side(slope, avg_x, avg_y, x_mid_line):
     #to ignore outlires in each side, added a comparison to middle line x value
-    if slope< 0 and avg_x <= x_mid_line and avg_y >=y_mid_line:
+    if slope < 0 and avg_x <= x_mid_line: # and avg_y >=y_mid_line:
         return LEFT
-    elif slope >0 and avg_x >= x_mid_line and avg_y>=y_mid_line:
+    elif slope >0 and avg_x >= x_mid_line: # and avg_y>=y_mid_line:
         return RIGHT
     else:
         return
+
+def filter(lines, threshold=6):
+
+    lines_copy = lines.copy()
+    difference = np.abs(lines - np.median(lines))
+    median_difference = np.median(difference)
+    if median_difference == 0:
+        s = 0
+    else:
+        s = difference / float(median_difference)
+    mask = s > threshold
+    lines[mask] = np.median(lines)
+    return lines
+
 
 def draw_lines(img, lines, color=[255, 0, 0], thickness=10):
     """
@@ -81,29 +94,66 @@ def draw_lines(img, lines, color=[255, 0, 0], thickness=10):
     """
     left_line = np.empty((0,2), dtype=np.int32)
     right_line= np.empty((0,2), dtype=np.int32)
+
     x_mid_line = img.shape[1]/2
-    y_mid_line = 300
     for line in lines:
         for x1,y1,x2,y2 in line:
             avg_x = int((x1+x2)/2)
             avg_y = int((y1+y2)/2)
-            side=find_side(x1,y1,x2,y2,x_mid_line, y_mid_line)
+            length = int(math.sqrt((x2-x1)**2 + (y2-y1)**2))
+            slope = find_slope(x1,y1,x2,y2)
+            side=find_side(slope , avg_x, avg_y,x_mid_line)
             if  side == LEFT:
-                left_line = np.append(left_line, np.array([[avg_x,avg_y]]), axis=0)
+                left_line = np.append(left_line,np.array([[avg_x, avg_y]]), axis=0)
             elif side == RIGHT:
-                right_line = np.append(right_line, np.array([[avg_x,avg_y]]), axis=0)
+                right_line = np.append(right_line,np.array([[avg_x,avg_y]]), axis=0)
+
+    left_line = filter(left_line)
+    right_line = filter(right_line)
+
 
     # negative slope:
-    if len(left_line)>0:
-        x1_left,y2_left= np.amin(left_line, axis=0)
-        x2_left,y1_left= np.amax(left_line, axis=0)
-        cv2.line(img, (x1_left, y1_left), (x2_left, y2_left), color, thickness)
+    if len(left_line) >0:
+        # y = ax+b
+        left_line = left_line[left_line[:,0].argsort()]
+        x1_left,y1_left= left_line[0]
 
-    # positive slope:
-    if len(right_line)>0:
-        x1_right,y1_right= np.amax(right_line, axis=0)
-        x2_right,y2_right= np.amin(right_line, axis=0)
-        cv2.line(img, (x2_right, y2_right), (x1_right, y1_right), color, thickness)
+        x2_left,y2_left = left_line[len(left_line)-1]
+
+        bottom_fix_y = img.shape[0]
+        top_left = [x2_left, y2_left]
+        try:
+            a, b = np.polyfit((x1_left,x2_left), (y1_left,y2_left), 1)
+            bottom_fix_x = int((bottom_fix_y - b )/a)
+            gap = 150
+            x_mid = int(img.shape[1]/2-gap)
+            if bottom_fix_x <0 or bottom_fix_x<gap :
+                bottom_fix_x=gap
+            cv2.line(img, (top_left[0],top_left[1]), (bottom_fix_x, bottom_fix_y), color, thickness)
+        except Exception as err:
+            print(err)
+            pass
+
+    # negative slope:
+    if len(right_line) >0:
+        # y = ax+b
+        right_line = right_line[right_line[:,0].argsort()]
+        x1_right,y1_right= right_line[0]
+
+        x2_right,y2_right = right_line[len(right_line)-1]
+
+        bottom_fix_y = img.shape[0]
+        top_right = [x1_right, y1_right]
+        try:
+            a, b = np.polyfit((x1_right,x2_right), (y1_right,y2_right), 1)
+            bottom_fix_x = int((bottom_fix_y - b )/a)
+            x_mid = int(img.shape[1]/2-150)
+            if bottom_fix_x<x_mid: bottom_fix_x=x_mid
+            cv2.line(img, (top_right[0],top_right[1]), (bottom_fix_x, bottom_fix_y), color, thickness)
+        except Exception as err:
+            print(err)
+            pass
+
 
 def hough_lines(img, rho, theta, threshold, min_line_len, max_line_gap):
     """
