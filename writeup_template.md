@@ -18,13 +18,6 @@ Gaols:
 * Developing a robust pipeline to detect laneline on different roads
 * Detecting outliers and how they affect the lines
 
-
-
-
-[//]: # (Image References)
-
-[gray_scale]: ./examples/gray_image.jpg "Grayscale"
-
 ---
 
 ### Reflection
@@ -59,6 +52,9 @@ The most challenging step was to detect outliers and draw a perfect line between
 
 And as the last step , I added lines to input_image to display how it's fitting the lanelines.
 
+[input_image]: https://github.com/chocolateHszd/LaneLines_p1/blob/master/test_images/solidWhiteCurve.jpg "Input Image"
+
+[grayscale_image]: https://github.com/chocolateHszd/LaneLines_p1/blob/master/examples/gray_image.jpeg "Gray Scale Image"
 
 ###2. Shortcommings:
 Pipleline is very sensitive to outliers even after removing a bunch of them from datapoints there are still jumps in some frames, I think it might be related to image resolution (each frame might have a different resolution) and curves in the lanelines needs a better fitting approach other than `y= ax+b`.
