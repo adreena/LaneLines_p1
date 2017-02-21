@@ -10,20 +10,34 @@ The goals / steps of this project are the following:
   
   In order to prepare input image for edge detection, it needs to be converted to grayscale first.
   method used for this conversion: ```cv2.cvtColor(input_image, cv2.COLOR_RGB2GRAY)```
-  
-  [image1]: ./examples/gray.png "Grayscale"
-
 * Step 3: Smoothing the image using GaussianBlur
+
+  Blurred the image using kernel_size=3 for images and kernel_size = 9 for video images for smoothing the edges to get better results from canny
 * Step 4: Finding edges using Canny edge detection with a set of low and high threshold
+ 
+ After running a few experiments found the following values as thresholds:
+    * low_threshold = 90
+    * high_threshold = 110
 * Step 5: Marking a region that has high probablity of containing LaneLines with a set of vertices as a polygon
+  
+ I figured that adding margins to both (x,y) for each verice can help reduce outliers specifically in the optional-video part of the assignment
+    * lower part of polygon: Xs have a margin of 150px from edges, Ys have margin of 100px from the bottom of the image 
+    * upper part of polygon: Xs have a mrgin of 150px from the middle of the image(horizontally) and margin of ~60px from the middle of the image (vertically)
 * Step 6: Sending the masked_region to HoughLine Transformation to detect lines
+  
+  Method used for this section with following paramters: ```cv2.HoughLinesP(edges, rho, theta, threshold, np.array([]), minLineLength=min_line_len, maxLineGap=max_line_gap)```
+    * rh = 1
+    * theta = np.pi/180
+    * threshold = 7
+    * min_line_length = 5
+    * max_line_gap = 10
 * Step 7: Filtering outliers and drawing lines 
 * Step 8: displaying the lines on the input image 
 
 
 [//]: # (Image References)
 
-[image1]: ./examples/grayscale.jpg "Grayscale"
+[gray_scale]: ./examples/gray_image.jpg "Grayscale"
 
 ---
 
