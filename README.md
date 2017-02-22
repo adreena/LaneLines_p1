@@ -57,12 +57,14 @@ The most challenging step was to detect outliers and draw a perfect line between
 
 And as the last step , I added lines to input_image to display how it's fitting the lanelines.
 
-  <img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-  <img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-  <img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-  <img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-  <img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-  <img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+
+---
 
 ###2. Shortcommings:
 Pipleline is very sensitive to outliers even after removing a bunch of them from datapoints there are still jumps in some frames, I think it might be related to image resolution/shadows (each frame might have a different resolution/sun exposure) and curves in the lanelines needs a better fitting approach other than `y= ax+b`.
@@ -74,3 +76,16 @@ Another big flaw in the whole approach is when we don't have lines on the street
  * 1- Detecting curves can improve line fitting where road is bending.
  * 2- Training a model on images to find a relative region based on different features (such as image_size, camera resolution, angle , ...) can help reducing point_dependency in laneline detection, specially on roads with no lines.
 
+---
+5 more examples:
+
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
