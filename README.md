@@ -57,9 +57,7 @@ The most challenging step was to detect outliers and draw a perfect line between
 
 And as the last step , I added lines to input_image to display how it's fitting the lanelines.
 
-[//]: # (Image References)
-
-[image1]: ./examples/grayscale.jpg "Grayscale"
+[image1]: (https://github.com/chocolateHszd/LaneLines_p1/blob/master/test_images/solidWhiteCurve.jpg)
 
 
 ###2. Shortcommings:
