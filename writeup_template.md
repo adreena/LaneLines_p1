@@ -22,7 +22,7 @@ Goals:
 
 ### Reflection
 
-In order to prepare input image for edge detection, first it needs to be converted to grayscale. Smoothing the edges to get better results from Canny edge detection, for blurring the images I used kernel_size=3 and kernel_size = 9 for video frames. 
+In order to prepare input image for edge detection, first it needs to be converted to grayscale. Smooth edges help getting better results from Canny edge detection, for blurring the images I used kernel_size=3 and kernel_size = 9 for video frames. 
 Next step is to pass the blurred_image to Canny edge detection, after running a few experiments I found the following values as thresholds
  * low_threshold = 90
  * high_threshold = 110
