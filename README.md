@@ -49,7 +49,7 @@ The most challenging step was to detect outliers and draw a perfect line between
      * Then I calculated coefficients of a fitting line between these 2 points to find `a` and `b` of `y=ax+b` using polyfit.
      * Next I plotted `bottom_point` and `top_point` for each side:
 
-       1- bottom_point: using coefficients from the previous step I calculated x for `point(x,height_of_image)`, this is to have Lane_Lines starting from the bottom of the image with our longest_line from hough_lines
+       1- bottom_point: using coefficients from the previous step I calculated x for `point(x,height_of_image)`, this is to have Lane_Lines starting from the bottom of the image with our longest_line_fit from hough_lines
 
        2- top_point: to find the best point on top, I found the maximum y detected in list of lines using `numpy.amax` to plot this `point (x,y_max)` using same coefficients
        
