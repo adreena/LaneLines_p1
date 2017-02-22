@@ -57,12 +57,12 @@ The most challenging step was to detect outliers and draw a perfect line between
 
 And as the last step , I added lines to input_image to display how it's fitting the lanelines.
 
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteCurve.jpg" width="200" height="200"/>
+<img src="./test_images/gray.jpeg" width="200" height="200"/>
+<img src="./test_images/canny.jpeg" width="200" height="200"/>
+<img src="./test_images/masked_edges.jpeg" width="200" height="200"/>
+<img src="./test_images/lines.jpeg" width="200" height="200"/>
+<img src="./test_images/solidWhiteCurve_final.jpg" width="200" height="200"/>
 
 ---
 
