@@ -39,7 +39,7 @@ Then I passed the masked_area to HoughLine transformation with following paramet
   * max_line_gap = 10
 
 The most challenging step was to detect outliers and draw a perfect line between points, In this section I did the following modifications to remove outliers from data_points and connect lines on each side to form a solid line:
-   * I separated the lines based on their slope negative/positive into 2 sets of left_lines and right_lines accordingly
+   * I separated the lines based on their slope negative/positive into 2 sets of left_lines and right_lines accordingly. 
      As a further step to remove some of the outliers, I added another check to see if the points have correct position by comparing their x value (as average of x1 & x2 of the line) to x_middle of the image : 
      * 1- if slope is negative and x_avg <= x_middle it's accepted and appended to left_lines
      * 2- if slope is positive and x_avg >= x_middle , it's accepted and appended to right_lines
@@ -47,13 +47,13 @@ The most challenging step was to detect outliers and draw a perfect line between
    * For the last step :
      * I sorted lists based on their line_length to find points that are creating the longest line. 
      * Then I calculated coefficients of a fitting line between these 2 points to find `a` and `b` of `y=ax+b` using polyfit.
-     * Next I plotted bottom_point and top_point for each side:
+     * Next I plotted `bottom_point` and `top_point` for each side:
 
-       1- bottom_point: using coefficients from the previous step I calculated x for  point(x,height_of_image), this is to have Lane_Lines starting from the bottom of the image with our longest_line from hough_lines
+       1- bottom_point: using coefficients from the previous step I calculated x for `point(x,height_of_image)`, this is to have Lane_Lines starting from the bottom of the image with our longest_line from hough_lines
 
-       2- top_point: to find the best point on top, I found the maximum y detected in list of lines using numpy.amax to plot this point (x,y_max) using same coefficients
+       2- top_point: to find the best point on top, I found the maximum y detected in list of lines using `numpy.amax` to plot this `point (x,y_max)` using same coefficients
        
-     * Final step is to connect a line between bottom_point(x1,y1) and top_point 
+     * Final step is to connect a line between `bottom_point(x,y)` and `top_point(x,y)` 
 
 And as the last step , I added lines to input_image to display how it's fitting the lanelines.
 
