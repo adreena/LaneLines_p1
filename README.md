@@ -79,13 +79,13 @@ Another big flaw in the whole approach is when we don't have lines on the street
 ---
 5 more examples:
 
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
-<img src="./test_images/solidWhiteCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteRight.jpg" width="300" height="200"/>
+<img src="./test_images/solidWhiteRight_final.jpeg" width="300" height="200"/>
+<img src="./test_images/solidYellowCurve.jpg" width="300" height="200"/>
+<img src="./test_images/solidYellowCurve_final.jpeg" width="300" height="200"/>
+<img src="./test_images/solidYellowCurve2.jpg" width="300" height="200"/>
+<img src="./test_images/solidYellowCurve2_final.jpeg" width="300" height="200"/>
+<img src="./test_images/solidYellowLeft.jpg" width="300" height="200"/>
+<img src="./test_images/solidYellowLeft_final.jpeg" width="300" height="200"/>
+<img src="./test_images/whiteCarLaneSwitch.jpg" width="300" height="200"/>
+<img src="./test_images/whiteCarLaneSwitch_final.jpeg" width="300" height="200"/>
